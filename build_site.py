@@ -368,6 +368,8 @@ def brandline(depth="", current=""):
     links = [
         link("All Tools", f"{depth}index.html", "home"),
         link("About", f"{depth}about.html", "about"),
+        link("Help", f"{depth}help.html", "help"),
+        link("FAQ", f"{depth}faq.html", "faq"),
         link("Terms", f"{depth}terms.html", "terms"),
         link("Contact", f"{depth}contact.html", "contact"),
     ]
@@ -386,6 +388,8 @@ def footer(depth=""):
     Slate &amp; Ledger is a product of The Allerick Dynasty.<br>
     One-time purchase &mdash; no subscription, no account, no cloud.<br>
     <span class="footer-links"><a href="{depth}about.html">About</a> &middot;
+    <a href="{depth}help.html">Help</a> &middot;
+    <a href="{depth}faq.html">FAQ</a> &middot;
     <a href="{depth}terms.html">Terms of Sale</a> &middot;
     <a href="{depth}contact.html">Contact</a></span>
   </footer>"""
@@ -486,9 +490,9 @@ for p in PRODUCTS:
         h1 = p["name"]
 
     if p["buy_url"]:
-        cta = f'<a class="btn primary" href="{p["buy_url"]}">Buy the {p["price"]} 2026 Edition</a>'
+        cta = f'<a class="btn primary" href="{p["buy_url"]}">Buy the {p["price"]} 2026-2027 Edition</a>'
     else:
-        cta = f'<span class="btn disabled">Buy the {p["price"]} 2026 Edition</span>\n        <span class="btn-note">Store link goes live at launch.</span>'
+        cta = f'<span class="btn disabled">Buy the {p["price"]} 2026-2027 Edition</span>\n        <span class="btn-note">Store link goes live at launch.</span>'
 
     hero_block = f"""<div class="void-wrap fade-2">
       <div class="void-glow"></div>
@@ -519,7 +523,7 @@ for p in PRODUCTS:
 
       <div class="price-line">
         <span class="amt">{p['price']}</span>
-        <span class="note">2026 Edition &mdash; one-time purchase, yours to keep</span>
+        <span class="note">2026-2027 Edition &mdash; one-time purchase, yours to keep</span>
       </div>
       <div class="cta-row">
         {cta}
@@ -598,6 +602,190 @@ about_html = f"""<!DOCTYPE html>
 with open(os.path.join(OUT_DIR, "about.html"), "w") as f:
     f.write(about_html)
 print("about.html written")
+
+# ------------------------------------------------------------------
+# help.html — one section per tool. Content is hand-copied from
+# HELP_GUIDE.md at the suite root (that file is the source of truth; keep
+# this block in sync with it by hand, same convention as every other page
+# here pulling from a markdown source).
+# ------------------------------------------------------------------
+
+help_html = f"""<!DOCTYPE html>
+<html lang="en">
+{head("Help — Slate & Ledger", "How to use every tool in the Slate & Ledger suite, step by step.")}
+<body style="--bg-image:url('img/bg-filmset.jpg')">
+  <div class="fade-1">{brandline(current="help")}</div>
+  <div class="wrap">
+    <h1 class="page-title fade-1">Help</h1>
+
+    <div class="fade-3 prose">
+      <p style="text-align:center">One section per tool &mdash; what it does, how to get started, and the
+      questions people actually get stuck on. Every tool is a single downloadable file (or, for Paperwork
+      Tracker, a workbook plus a companion browser page) &mdash; no install, no account, no server.</p>
+
+      <h2>Micro-Budget Film Budget Builder</h2>
+      <p>Real, sourced 2026 SAG-AFTRA and IATSE rates across all 7 low-budget tiers, plus a Resources tab
+      pointing you to real places to price locations, gear, props, insurance, and legal help.</p>
+      <p><strong>Getting started:</strong> Open the workbook in Excel, Sheets, or Numbers &rarr; enter your
+      project basics and pick a budget tier &rarr; watch the TIER ALERT banner, which fires the moment
+      something doesn't fit the tier you picked &rarr; use the Resources tab when you don't know what a line
+      item should cost &rarr; the Top Sheet totals everything automatically.</p>
+      <p><strong>Non-union?</strong> Every tier has a Non-Union path. <strong>First time budgeting a film?</strong>
+      That's who this is built for &mdash; it explains what each tier requires and warns you before a real
+      mistake, not after.</p>
+
+      <h2>Episodic Series Budget Builder</h2>
+      <p>The same real rates as the film tool, built for a season: per-episode and season-level costs modeled
+      separately, plus a per-episode Tier Cap Check (the Micro-Budget tier's cap applies per episode, not per
+      season).</p>
+      <p><strong>Getting started:</strong> Set your episode count first &mdash; it drives the rest of the sheet
+      &rarr; keep season-long cast/crew separate from per-episode guest cast &rarr; watch the per-episode Tier
+      Cap Check if you're on the Micro-Budget tier &rarr; import a Schedule Builder export into Actuals to
+      track real cost against budget, episode by episode.</p>
+
+      <h2>Schedule Builder</h2>
+      <p>Import your actual script &mdash; Final Draft (.fdx) or Fountain, not a flattened PDF &mdash; and get
+      an editable scene breakdown, a real drag-and-drop stripboard, an Auto-arrange starting point, and a Day
+      Out of Days.</p>
+      <p><strong>Getting started:</strong> Import your script file &rarr; review the scene-by-scene breakdown
+      (anything the parser can't know for certain comes back as a flagged first-pass guess &mdash; check and
+      correct those) &rarr; drag scenes onto shoot days, or click Auto-arrange for a starting point that
+      explains every choice and flags every compromise &rarr; enter cast availability so a conflict gets
+      flagged before you shoot around it by accident &rarr; export the Day Out of Days and
+      <code>schedule.csv</code> for the rest of the suite.</p>
+
+      <h2>Paperwork Tracker (+ the Filler)</h2>
+      <p>Tracks every WGA, SAG-AFTRA, DGA, and IATSE deadline &mdash; chronologically on the Timeline tab, or
+      grouped by union on Timeline &mdash; By Union if you're splitting the paperwork across more than one
+      person. The companion Filler (open "Paperwork Filler.html" in any browser) fills your production's
+      details once and downloads real, filled union forms. Chain of Title tracks the documents that decide
+      whether the finished film can be sold. The Deliverables Checklist is the final sale-readiness
+      gate &mdash; a plain red/amber/green banner across 14 items.</p>
+      <p><strong>Getting started:</strong> Enter key dates and union choices on Production Info &rarr; check
+      the Timeline (or Timeline &mdash; By Union) for deadlines &rarr; track Chain of Title as it's locked in,
+      pre-production &rarr; open the Filler and download real filled forms &rarr; before submitting anywhere,
+      run the Deliverables Checklist.</p>
+      <div class="callout">Slate &amp; Ledger is not a law firm; nothing here is legal advice, and using it
+      does not create an attorney-client relationship. It's a document organiser &mdash; confirm every item
+      with a qualified entertainment attorney before relying on it for a real production or sale.</div>
+
+      <h2>Residuals &amp; Self-Distribution Revenue Tracker</h2>
+      <p>The only tool in the suite that looks after release: real SAG-AFTRA residual formulas by category,
+      WGA residuals (a sourced 1.2% theatrical-reuse rate, split by writer percentage), and a YouTube
+      ad-revenue/profit-share tracker for self-distribution outside a union contract.</p>
+      <p><strong>Getting started:</strong> Pick the calculator that matches your situation &mdash; a
+      traditional distribution deal, a self-distributed YouTube release, or both &rarr; for SAG-AFTRA, enter
+      each performer once; the per-performer table sums what they're owed across every category that applies
+      &rarr; for YouTube, enter gross ad revenue and the sheet applies the platform split, recoups your costs,
+      then splits the remainder across participants, flagging if shares ever exceed 100%.</p>
+
+      <h2>Pricing, bundles, and discounts</h2>
+      <p>See the <a href="faq.html">FAQ</a> for current pricing. Short version: each tool is a one-time
+      purchase, the bundle covers all five at a lower combined price, and there's a standing student/hardship
+      discount &mdash; no form, no means-testing, just email us.</p>
+
+      <h2>Still stuck?</h2>
+      <p style="text-align:center">Email <a href="mailto:hello.slateandledger@gmail.com">hello.slateandledger@gmail.com</a>
+      with which tool, what you were trying to do, and what happened instead &mdash; a real person reads every
+      message.</p>
+
+      {footer()}
+    </div>
+  </div>
+</body>
+</html>
+"""
+with open(os.path.join(OUT_DIR, "help.html"), "w") as f:
+    f.write(help_html)
+print("help.html written")
+
+# ------------------------------------------------------------------
+# faq.html — quick suite-wide answers. Reuses the per-product FAQs already
+# drafted in each MARKETING_COPY.md and marketing/suite-bundle-listing.md
+# rather than inventing new copy (same house convention as the rest of this
+# file). Pricing here must match GO_TO_MARKET.md §2 exactly -- that's the
+# one confirmed source; PRODUCT_LINE_PLAN.md has a separate, explicitly
+# "not final" repricing under discussion that does NOT belong here yet.
+# ------------------------------------------------------------------
+
+faq_html = f"""<!DOCTYPE html>
+<html lang="en">
+{head("FAQ — Slate & Ledger", "Frequently asked questions about the Slate & Ledger suite, pricing, and each tool.")}
+<body style="--bg-image:url('img/bg-filmset.jpg')">
+  <div class="fade-1">{brandline(current="faq")}</div>
+  <div class="wrap">
+    <h1 class="page-title fade-1">FAQ</h1>
+
+    <div class="fade-3 prose">
+      <h2>General</h2>
+      <p><strong>Is there a subscription?</strong> No. Every tool is a one-time purchase &mdash; no account, no
+      server, no recurring charge. Yours to keep and run offline for as long as you keep the file.</p>
+      <p><strong>Which apps does it work in?</strong> Excel, Google Sheets, and Apple Numbers for the
+      workbooks &mdash; tested, not assumed. The Paperwork Filler runs in any browser.</p>
+      <p><strong>Is this legal, financial, or production advice?</strong> No. Slate &amp; Ledger is not a law
+      firm and these aren't legal, financial, or production advice &mdash; they're research and planning
+      estimates. Always confirm a figure directly with the union, guild, agency, or a qualified entertainment
+      attorney before relying on it for a real production. Full terms: <a href="terms.html">Terms of Sale</a>.</p>
+      <p><strong>Do the tools talk to each other?</strong> Yes, where it's real data: the Schedule Builder's
+      export feeds real shoot dates into the Budget Builder's Actuals tab and the Paperwork Tracker's weekly
+      deadlines; the Residuals Tracker is a companion to the budget builders' own cast/crew data.</p>
+
+      <h2>Pricing</h2>
+      <p>Each tool is <strong>$35</strong> (Residuals &amp; Self-Distribution Revenue Tracker is $15), or get
+      all five in the <strong>suite bundle for $99</strong> &mdash; bought separately that's $155, so the
+      bundle pays for itself once you need two or three of them.</p>
+      <p><strong>Pay-what-you-want</strong> is available on the flagship tool and the bundle, with a real
+      floor ($49 for the bundle). <strong>Students</strong> pay a reduced price on any tool or the suite
+      ($15 / $39) &mdash; a .edu address or a photo of a student ID is enough. <strong>Genuine hardship:</strong>
+      email us and tell us what you're making &mdash; no form, no means-testing, a human reply.</p>
+      <p><strong>What happens when union rates update?</strong> A new dated Edition ships as a separate,
+      low-cost upgrade ($15 single tool / $39 suite) for owners of the immediately prior Edition. Your current
+      Edition keeps working regardless.</p>
+
+      <h2>Festival partners</h2>
+      <p><strong>Are you affiliated with any festivals?</strong> We're building relationships with a small
+      number of festivals to offer their filmmakers a discount on the suite. If your festival is interested in
+      partnering, email <a href="mailto:hello.slateandledger@gmail.com">hello.slateandledger@gmail.com</a>.</p>
+
+      <h2>Micro-Budget Film Budget Builder</h2>
+      <p><strong>Do I still need Movie Magic Budgeting?</strong> No &mdash; built to replace it at this budget
+      size. <strong>Non-union?</strong> Every tier has a Non-Union path. More on the
+      <a href="products/micro-budget-film-budget-builder.html">product page</a>.</p>
+
+      <h2>Episodic Series Budget Builder</h2>
+      <p><strong>Is this just the film tool with an episode counter?</strong> No &mdash; per-episode/season
+      cost modeling and the per-episode tier-cap check are genuinely episodic concerns a single-project tool
+      can't represent. More on the <a href="products/episodic-series-budget-builder.html">product page</a>.</p>
+
+      <h2>Schedule Builder</h2>
+      <p><strong>Does it read a PDF script?</strong> No, on purpose &mdash; .fdx and Fountain parse reliably;
+      a PDF breakdown is always a rough guess. <strong>Will Auto-arrange give a perfect schedule?</strong> No
+      &mdash; it's a reviewable first pass, not a final answer. More on the
+      <a href="products/schedule-builder.html">product page</a>.</p>
+
+      <h2>Paperwork Tracker (+ the Filler)</h2>
+      <p><strong>Does this file anything for me?</strong> No &mdash; it fills and generates the paperwork; you
+      (or your Business Representative, or the union's own portal) still submit it. More on the
+      <a href="products/paperwork-tracker.html">product page</a> or the <a href="help.html">Help</a> page.</p>
+
+      <h2>Residuals &amp; Self-Distribution Revenue Tracker</h2>
+      <p><strong>Do I need this if I already bought a budget builder?</strong> Only if you want to model what
+      the film earns after release &mdash; it's a genuinely separate calculation. More on the
+      <a href="products/residuals-revenue-tracker.html">product page</a>.</p>
+
+      <p style="text-align:center; margin-top:34px">Question not answered here? Check the
+      <a href="help.html">Help</a> page, or email
+      <a href="mailto:hello.slateandledger@gmail.com">hello.slateandledger@gmail.com</a>.</p>
+
+      {footer()}
+    </div>
+  </div>
+</body>
+</html>
+"""
+with open(os.path.join(OUT_DIR, "faq.html"), "w") as f:
+    f.write(faq_html)
+print("faq.html written")
 
 terms_html = f"""<!DOCTYPE html>
 <html lang="en">

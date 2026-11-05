@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help — Slate & Ledger</title>
+<meta name="description" content="How to use every tool in the Slate & Ledger suite, step by step.">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Zilla+Slab:wght@400;500;600;700&family=Mulish:wght@400;500;600;700&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/simplifica" rel="stylesheet">
+<style>
+
+  /* Slate & Ledger house dark skin — the same committed-dark "cutting-room"
+     world as the companion browser tools (see branding/BRAND_GUIDE.md).
+     Not theme-responsive on purpose: dark mode is the identity here, not a
+     toggle — 2026's own web-design trend line agrees with that call. */
+  :root{
+    --bg:#14161d; --surface:#1b1e27; --surface-raised:#20242e; --line:#2c2f3a;
+    --navy:#1F4E78; --slate:#17324b; --slate-line:#24567e;
+    --gold:#D9A93A; --gold-dim:#A9822A; --red:#C1442E; --green:#7BA383;
+    --text:#F3EEE1; --text-dim:#ABA391; --text-faint:#6E6857;
+    --f-display:'Georgia','Times New Roman',serif;
+    --f-head:'Jost','Helvetica Neue',Helvetica,Arial,sans-serif;
+    --f-body:'Simplifica','Avenir Next','Avenir','Mulish','Nunito Sans',system-ui,sans-serif;
+    --f-util:'Zilla Slab','Georgia',serif;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ background-color:var(--bg);
+    background-image:linear-gradient(rgba(20,22,29,.68),rgba(20,22,29,.68)), var(--bg-image);
+    background-size:cover; background-position:center; background-repeat:no-repeat;
+    background-attachment:fixed;
+    color:var(--text); font-family:var(--f-body); font-weight:700;
+    line-height:1.6; min-height:100vh; text-transform:uppercase; letter-spacing:.03em;
+    -webkit-text-stroke:.4px currentColor; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px 90px; }
+  a{ color:var(--gold); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+
+  /* ---- fade-up choreography: shell, then image, then text, ~.5s apart ---- */
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(16px);} to{ opacity:1; transform:translateY(0);} }
+  .fade-1,.fade-2,.fade-3{ opacity:0; animation:fadeUp .7s ease-out forwards; }
+  .fade-1{ animation-delay:.05s; }
+  .fade-2{ animation-delay:.55s; }
+  .fade-3{ animation-delay:1.05s; }
+  @media (prefers-reduced-motion: reduce){
+    .fade-1,.fade-2,.fade-3{ animation:none; opacity:1; }
+  }
+
+  /* ---- ticker: a scrolling strip of the union/guild/paperwork terms the suite
+     actually tracks — the same "always-moving status strip" cue as the fade
+     choreography above, just horizontal. Two copies of the list sit side by
+     side and slide together by exactly one copy's width, so the loop seams
+     invisibly. ---- */
+  .ticker{ background:var(--bg); border-bottom:1px solid var(--line); overflow:hidden;
+    margin:0 -24px; white-space:nowrap; }
+  .ticker-track{ display:inline-flex; animation:ticker-scroll 38s linear infinite; }
+  .ticker-track span{ font-family:var(--f-util); font-size:12px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--text-faint); padding:10px 22px; flex:0 0 auto; }
+  .ticker-track span.dot{ color:var(--gold-dim); padding:10px 0; }
+  @keyframes ticker-scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce){ .ticker-track{ animation:none; } }
+
+  /* ---- floating status chips: small pill call-outs that drift near a hero
+     object, each on its own fade delay so they don't all land at once. ---- */
+  .chip-field{ position:relative; }
+  .status-chip{ position:absolute; display:flex; align-items:center; gap:7px;
+    background:var(--surface-raised); border:1px solid var(--line); border-radius:99px;
+    padding:8px 16px 8px 12px; font-family:var(--f-util); font-size:12.5px; color:var(--text-dim);
+    box-shadow:0 10px 24px rgba(0,0,0,.4); animation:chipfloat 7s ease-in-out infinite; white-space:nowrap; }
+  .status-chip .ok{ width:16px; height:16px; border-radius:50%; background:var(--green);
+    display:flex; align-items:center; justify-content:center; color:#0c140f; font-size:10px; flex:0 0 auto; }
+  @keyframes chipfloat{ 0%{ transform:translateY(0); } 50%{ transform:translateY(-8px); } 100%{ transform:translateY(0); } }
+  @media (prefers-reduced-motion: reduce){ .status-chip{ animation:none; } }
+
+  header.marquee{ background:var(--slate);
+    background-image:linear-gradient(180deg,#1a3a58,#17324b 62%,#142a40);
+    border-bottom:2px solid var(--gold); margin:0 -24px; padding:22px 24px 26px;
+    position:relative; overflow:hidden; }
+  .sprockets{ position:absolute; top:0; left:0; right:0; height:12px;
+    background-image:repeating-linear-gradient(90deg,var(--gold-dim) 0 7px,transparent 7px 24px); opacity:.45; }
+  .brandline{ display:flex; align-items:center; gap:11px; }
+  .brandline svg{ width:28px; height:28px; display:block; flex:0 0 auto; }
+  .brandline .wm{ font-family:var(--f-display); font-size:13px; letter-spacing:.32em;
+    color:var(--text); display:inline-block; transform:scaleX(1.06); transform-origin:left; opacity:.92; }
+  nav.crumb{ margin-top:10px; }
+  nav.crumb a{ font-family:var(--f-util); font-size:12.5px; color:var(--text-dim); }
+  nav.crumb a:hover{ color:var(--gold); }
+  nav.crumb a.on{ color:var(--gold); }
+  footer .footer-links{ display:inline-block; margin-top:8px; }
+  footer .footer-links a{ color:var(--text-dim); font-size:12px; }
+
+  .hero{ text-align:center; padding:64px 0 16px; }
+  h1{ font-family:var(--f-head); font-weight:700; letter-spacing:.01em;
+    font-size:clamp(34px,6.2vw,58px); line-height:1.08; text-transform:uppercase; margin:0 0 16px; }
+  h1 .gold{ color:var(--gold); }
+  .subhead{ font-family:var(--f-body); font-size:21px; color:var(--text-dim); max-width:640px;
+    margin:0 auto 30px; }
+  .eyebrow-label{ font-family:var(--f-head); letter-spacing:.14em; text-transform:uppercase;
+    font-size:14px; color:var(--gold); }
+
+  /* ---- the "floating in a void" hero treatment: a real photo cutout, not flat line art,
+     hovering over a radial-gradient spotlight so the dark ground reads as depth, not a flat page.
+     This is a flat image, not a 3D model, so motion stays to a gentle front-to-back nod (rotateX)
+     and a slow float — a real spin (rotateY past ~90°) would show the image edge-on and then
+     mirrored (backwards numerals, reversed wordmark), which reads as broken, not as depth. */
+  .void-wrap{ position:relative; display:flex; justify-content:center; align-items:center;
+    padding:18px 0 42px; perspective:1100px; }
+  .void-glow{ position:absolute; width:520px; height:520px; max-width:90vw;
+    background:radial-gradient(circle, rgba(217,169,58,.16) 0%, rgba(217,169,58,.05) 38%, transparent 68%);
+    pointer-events:none; }
+  .void-float{ position:relative; width:300px; max-width:70vw; animation:hover 10s ease-in-out infinite;
+    transform-style:preserve-3d; }
+  .void-float img{ width:100%; height:auto; display:block;
+    filter:drop-shadow(0 30px 40px rgba(0,0,0,.65)) drop-shadow(0 4px 14px rgba(217,169,58,.12)); }
+  @keyframes hover{
+    0%{ transform:translateY(0) rotateX(0deg); }
+    50%{ transform:translateY(-14px) rotateX(-16deg); }
+    100%{ transform:translateY(0) rotateX(0deg); }
+  }
+  @media (prefers-reduced-motion: reduce){ .void-float{ animation:none; } }
+
+  .rule{ height:2px; background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);
+    border:none; margin:40px 0; opacity:.7; }
+
+  .tools{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px; }
+  @media (max-width:640px){ .tools{ grid-template-columns:1fr; } }
+  .tool{ background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:20px 22px;
+    transition:border-color .15s; }
+  .tool:hover{ border-color:var(--gold-dim); }
+  .tool .order{ text-transform:uppercase; letter-spacing:.1em; font-size:11.5px; color:var(--gold);
+    font-family:var(--f-head); margin:0 0 6px; }
+  .tool h3{ font-family:var(--f-head); letter-spacing:.02em; font-size:20px; color:var(--text);
+    margin:0 0 6px; font-weight:400; text-transform:uppercase; }
+  .tool p{ margin:0; font-size:16.5px; color:var(--text-dim); line-height:1.55; }
+  .tool .price{ display:block; margin-top:10px; font-family:var(--f-head); letter-spacing:.03em; color:var(--gold); font-size:18px; }
+
+  .pitch{ font-family:var(--f-util); background:var(--surface); border:1px solid var(--line);
+    border-left:4px solid var(--gold); border-radius:6px; padding:22px 26px; margin-top:46px; font-size:16px;
+    line-height:1.6; }
+
+  .body-copy p{ font-size:18.5px; color:var(--text-dim); max-width:66ch; margin:0 auto 18px; text-align:left; }
+  .body-copy{ max-width:66ch; margin:0 auto; }
+
+  .price-line{ text-align:center; margin:40px 0 18px; }
+  .price-line .amt{ font-family:var(--f-head); letter-spacing:.02em; font-size:48px; color:var(--gold); }
+  .price-line .note{ display:block; font-family:var(--f-util); font-size:13px; color:var(--text-faint); margin-top:4px; }
+  .cta-row{ text-align:center; margin:22px 0 8px; }
+  .btn{ display:inline-block; font-family:var(--f-head); font-size:16px; letter-spacing:.06em;
+    text-transform:uppercase; padding:14px 28px; border-radius:5px; border:1px solid var(--slate-line); }
+  .btn.primary{ background:var(--navy); color:var(--text); }
+  .btn.primary:hover{ border-color:var(--gold); text-decoration:none; }
+  .btn.disabled{ background:var(--surface); color:var(--text-faint); border-color:var(--line); cursor:not-allowed; }
+  .btn-note{ display:block; margin-top:10px; font-family:var(--f-util); font-size:11.5px; color:var(--text-faint); }
+
+  footer{ text-align:center; margin-top:64px; font-size:12.5px; color:var(--text-faint);
+    font-family:var(--f-util); border-top:1px solid var(--line); padding-top:22px; }
+  footer a{ color:var(--text-dim); }
+
+  .page-title{ font-family:var(--f-head); font-size:clamp(30px,5vw,44px); letter-spacing:.04em;
+    text-transform:uppercase; text-align:center; margin:56px 0 30px; }
+  .prose{ max-width:70ch; margin:0 auto; font-size:18.5px; color:var(--text-dim); }
+  .prose h2{ font-family:var(--f-head); letter-spacing:.03em; text-transform:uppercase;
+    color:var(--text); font-size:20px; font-weight:400; margin:34px 0 10px; }
+  .prose p{ margin:0 0 16px; }
+  .prose strong{ color:var(--text); }
+  .callout{ font-family:var(--f-util); background:var(--surface); border:1px solid var(--line);
+    border-left:4px solid var(--gold); border-radius:6px; padding:18px 22px; margin:22px 0; font-size:14.5px;
+    line-height:1.6; color:var(--text-dim); }
+  .sources{ font-family:var(--f-util); font-size:13.5px; color:var(--text-dim); line-height:2; }
+  .contact-block{ text-align:center; margin:48px 0; }
+  .contact-block .email{ font-family:var(--f-head); font-size:28px; letter-spacing:.03em; }
+
+</style>
+</head>
+<body style="--bg-image:url('img/bg-filmset.jpg')">
+  <div class="fade-1"><header class="marquee">
+    <div class="sprockets"></div>
+    <div class="brandline">
+      
+<svg viewBox="0 0 100 100" aria-hidden="true">
+  <rect x="4" y="11" width="92" height="82" rx="6" fill="none" stroke="#F3EEE1" stroke-width="2.5"/>
+  <line x1="12" y1="41" x2="88" y2="41" stroke="#D9A93A" stroke-width="2.5"/>
+  <circle cx="19" cy="26" r="3" fill="#D9A93A"/>
+  <line x1="34" y1="17" x2="41" y2="35" stroke="#D9A93A" stroke-width="2.5"/>
+  <line x1="51" y1="17" x2="58" y2="35" stroke="#D9A93A" stroke-width="2.5"/>
+  <line x1="68" y1="17" x2="75" y2="35" stroke="#D9A93A" stroke-width="2.5"/>
+  <line x1="15" y1="54" x2="85" y2="54" stroke="#D9A93A" stroke-width="1.6" opacity=".8"/>
+  <line x1="15" y1="66" x2="85" y2="66" stroke="#D9A93A" stroke-width="1.6" opacity=".8"/>
+  <line x1="15" y1="78" x2="85" y2="78" stroke="#D9A93A" stroke-width="1.6" opacity=".8"/>
+</svg>
+
+      <span class="wm">SLATE &amp; LEDGER</span>
+    </div>
+    <nav class="crumb"><a href="index.html">All Tools</a> &middot; <a href="about.html">About</a> &middot; <a class="on" href="help.html">Help</a> &middot; <a href="faq.html">FAQ</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="contact.html">Contact</a></nav>
+  </header>
+  <div class="ticker"><div class="ticker-track"><span>IATSE</span><span class="dot">&#9679;</span><span>SAG-AFTRA</span><span class="dot">&#9679;</span><span>ACTRA</span><span class="dot">&#9679;</span><span>WGA</span><span class="dot">&#9679;</span><span>DGA</span><span class="dot">&#9679;</span><span>Teamsters</span><span class="dot">&#9679;</span><span>Micro-Budget Tier</span><span class="dot">&#9679;</span><span>SPA</span><span class="dot">&#9679;</span><span>UPA</span><span class="dot">&#9679;</span><span>Day Out of Days</span><span class="dot">&#9679;</span><span>Exhibit G</span><span class="dot">&#9679;</span><span>Coogan Law</span><span class="dot">&#9679;</span><span>Residuals</span><span class="dot">&#9679;</span><span>Tier Ceilings</span><span class="dot">&#9679;</span><span>Cast Clearance</span><span class="dot">&#9679;</span><span>IATSE</span><span class="dot">&#9679;</span><span>SAG-AFTRA</span><span class="dot">&#9679;</span><span>ACTRA</span><span class="dot">&#9679;</span><span>WGA</span><span class="dot">&#9679;</span><span>DGA</span><span class="dot">&#9679;</span><span>Teamsters</span><span class="dot">&#9679;</span><span>Micro-Budget Tier</span><span class="dot">&#9679;</span><span>SPA</span><span class="dot">&#9679;</span><span>UPA</span><span class="dot">&#9679;</span><span>Day Out of Days</span><span class="dot">&#9679;</span><span>Exhibit G</span><span class="dot">&#9679;</span><span>Coogan Law</span><span class="dot">&#9679;</span><span>Residuals</span><span class="dot">&#9679;</span><span>Tier Ceilings</span><span class="dot">&#9679;</span><span>Cast Clearance</span><span class="dot">&#9679;</span></div></div></div>
+  <div class="wrap">
+    <h1 class="page-title fade-1">Help</h1>
+
+    <div class="fade-3 prose">
+      <p style="text-align:center">One section per tool &mdash; what it does, how to get started, and the
+      questions people actually get stuck on. Every tool is a single downloadable file (or, for Paperwork
+      Tracker, a workbook plus a companion browser page) &mdash; no install, no account, no server.</p>
+
+      <h2>Micro-Budget Film Budget Builder</h2>
+      <p>Real, sourced 2026 SAG-AFTRA and IATSE rates across all 7 low-budget tiers, plus a Resources tab
+      pointing you to real places to price locations, gear, props, insurance, and legal help.</p>
+      <p><strong>Getting started:</strong> Open the workbook in Excel, Sheets, or Numbers &rarr; enter your
+      project basics and pick a budget tier &rarr; watch the TIER ALERT banner, which fires the moment
+      something doesn't fit the tier you picked &rarr; use the Resources tab when you don't know what a line
+      item should cost &rarr; the Top Sheet totals everything automatically.</p>
+      <p><strong>Non-union?</strong> Every tier has a Non-Union path. <strong>First time budgeting a film?</strong>
+      That's who this is built for &mdash; it explains what each tier requires and warns you before a real
+      mistake, not after.</p>
+
+      <h2>Episodic Series Budget Builder</h2>
+      <p>The same real rates as the film tool, built for a season: per-episode and season-level costs modeled
+      separately, plus a per-episode Tier Cap Check (the Micro-Budget tier's cap applies per episode, not per
+      season).</p>
+      <p><strong>Getting started:</strong> Set your episode count first &mdash; it drives the rest of the sheet
+      &rarr; keep season-long cast/crew separate from per-episode guest cast &rarr; watch the per-episode Tier
+      Cap Check if you're on the Micro-Budget tier &rarr; import a Schedule Builder export into Actuals to
+      track real cost against budget, episode by episode.</p>
+
+      <h2>Schedule Builder</h2>
+      <p>Import your actual script &mdash; Final Draft (.fdx) or Fountain, not a flattened PDF &mdash; and get
+      an editable scene breakdown, a real drag-and-drop stripboard, an Auto-arrange starting point, and a Day
+      Out of Days.</p>
+      <p><strong>Getting started:</strong> Import your script file &rarr; review the scene-by-scene breakdown
+      (anything the parser can't know for certain comes back as a flagged first-pass guess &mdash; check and
+      correct those) &rarr; drag scenes onto shoot days, or click Auto-arrange for a starting point that
+      explains every choice and flags every compromise &rarr; enter cast availability so a conflict gets
+      flagged before you shoot around it by accident &rarr; export the Day Out of Days and
+      <code>schedule.csv</code> for the rest of the suite.</p>
+
+      <h2>Paperwork Tracker (+ the Filler)</h2>
+      <p>Tracks every WGA, SAG-AFTRA, DGA, and IATSE deadline &mdash; chronologically on the Timeline tab, or
+      grouped by union on Timeline &mdash; By Union if you're splitting the paperwork across more than one
+      person. The companion Filler (open "Paperwork Filler.html" in any browser) fills your production's
+      details once and downloads real, filled union forms. Chain of Title tracks the documents that decide
+      whether the finished film can be sold. The Deliverables Checklist is the final sale-readiness
+      gate &mdash; a plain red/amber/green banner across 14 items.</p>
+      <p><strong>Getting started:</strong> Enter key dates and union choices on Production Info &rarr; check
+      the Timeline (or Timeline &mdash; By Union) for deadlines &rarr; track Chain of Title as it's locked in,
+      pre-production &rarr; open the Filler and download real filled forms &rarr; before submitting anywhere,
+      run the Deliverables Checklist.</p>
+      <div class="callout">Slate &amp; Ledger is not a law firm; nothing here is legal advice, and using it
+      does not create an attorney-client relationship. It's a document organiser &mdash; confirm every item
+      with a qualified entertainment attorney before relying on it for a real production or sale.</div>
+
+      <h2>Residuals &amp; Self-Distribution Revenue Tracker</h2>
+      <p>The only tool in the suite that looks after release: real SAG-AFTRA residual formulas by category,
+      WGA residuals (a sourced 1.2% theatrical-reuse rate, split by writer percentage), and a YouTube
+      ad-revenue/profit-share tracker for self-distribution outside a union contract.</p>
+      <p><strong>Getting started:</strong> Pick the calculator that matches your situation &mdash; a
+      traditional distribution deal, a self-distributed YouTube release, or both &rarr; for SAG-AFTRA, enter
+      each performer once; the per-performer table sums what they're owed across every category that applies
+      &rarr; for YouTube, enter gross ad revenue and the sheet applies the platform split, recoups your costs,
+      then splits the remainder across participants, flagging if shares ever exceed 100%.</p>
+
+      <h2>Pricing, bundles, and discounts</h2>
+      <p>See the <a href="faq.html">FAQ</a> for current pricing. Short version: each tool is a one-time
+      purchase, the bundle covers all five at a lower combined price, and there's a standing student/hardship
+      discount &mdash; no form, no means-testing, just email us.</p>
+
+      <h2>Still stuck?</h2>
+      <p style="text-align:center">Email <a href="mailto:hello.slateandledger@gmail.com">hello.slateandledger@gmail.com</a>
+      with which tool, what you were trying to do, and what happened instead &mdash; a real person reads every
+      message.</p>
+
+      <footer>
+    Slate &amp; Ledger is a product of The Allerick Dynasty.<br>
+    One-time purchase &mdash; no subscription, no account, no cloud.<br>
+    <span class="footer-links"><a href="about.html">About</a> &middot;
+    <a href="help.html">Help</a> &middot;
+    <a href="faq.html">FAQ</a> &middot;
+    <a href="terms.html">Terms of Sale</a> &middot;
+    <a href="contact.html">Contact</a></span>
+  </footer>
+    </div>
+  </div>
+</body>
+</html>
