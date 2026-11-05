@@ -408,7 +408,7 @@ tool_cards = "\n".join(f"""      <a class="tool" href="products/{p['slug']}.html
 index_html = f"""<!DOCTYPE html>
 <html lang="en">
 {head(
-    "Slate & Ledger — Tools for Independent Producers",
+    "Digital Indie Film Desk, by Slate & Ledger",
     "Budgeting, scheduling, union paperwork, and residuals tools for indie and micro-budget filmmakers. "
     "One-time purchase, no subscription, works offline."
 )}
@@ -416,8 +416,8 @@ index_html = f"""<!DOCTYPE html>
   <div class="fade-1">{brandline(current="home")}</div>
   <div class="wrap">
     <div class="hero fade-1">
-      <h1>Tools for<br><span class="gold">Independent Producers</span></h1>
-      <p class="subhead">For producers who build it themselves.</p>
+      <h1>Digital Indie<br><span class="gold">Film Desk</span></h1>
+      <p class="subhead">Tools for independent producers, by Slate &amp; Ledger.</p>
     </div>
 
     <div class="void-wrap chip-field fade-2">
@@ -798,7 +798,7 @@ terms_html = f"""<!DOCTYPE html>
     <div class="fade-3 prose">
       <p style="text-align:center; color:var(--text-faint)">The Allerick Dynasty (an S corporation formed in
       California) &mdash; effective date to be set at launch. Applies to all Slate &amp; Ledger products
-      unless a specific product states otherwise.</p>
+      (the Digital Indie Film Desk product line) unless a specific product states otherwise.</p>
 
       <h2>1. What you're buying</h2>
       <p>A digital spreadsheet/software product delivered as a file download. You're purchasing a
