@@ -385,7 +385,7 @@ def brandline(depth="", current=""):
 
 def footer(depth=""):
     return f"""<footer>
-    Slate &amp; Ledger is a product of The Allerick Dynasty.<br>
+    Slate &amp; Ledger is a product of The Allerick Dynasty Inc.<br>
     One-time purchase &mdash; no subscription, no account, no cloud.<br>
     <span class="footer-links"><a href="{depth}about.html">About</a> &middot;
     <a href="{depth}help.html">Help</a> &middot;
@@ -796,7 +796,7 @@ terms_html = f"""<!DOCTYPE html>
     <h1 class="page-title fade-1">Terms of Sale</h1>
 
     <div class="fade-3 prose">
-      <p style="text-align:center; color:var(--text-faint)">The Allerick Dynasty (an S corporation formed in
+      <p style="text-align:center; color:var(--text-faint)">The Allerick Dynasty Inc. (an S corporation formed in
       California) &mdash; effective date to be set at launch. Applies to all Slate &amp; Ledger products
       (the Digital Indie Film Desk product line) unless a specific product states otherwise.</p>
 
@@ -829,7 +829,7 @@ terms_html = f"""<!DOCTYPE html>
       <p>Provided "as is" and "as available," without warranty of any kind, express or implied.</p>
 
       <h2>6. Limitation of liability</h2>
-      <p>To the maximum extent permitted by law, The Allerick Dynasty is not liable for any direct, indirect,
+      <p>To the maximum extent permitted by law, The Allerick Dynasty Inc. is not liable for any direct, indirect,
       incidental, special, consequential, or exemplary damages arising from the purchase or use of a Slate
       &amp; Ledger product. <strong>Total liability for any claim is limited to the amount actually paid for
       that product.</strong></p>
