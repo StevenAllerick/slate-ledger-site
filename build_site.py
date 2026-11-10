@@ -685,7 +685,7 @@ help_html = f"""<!DOCTYPE html>
       discount &mdash; no form, no means-testing, just email us.</p>
 
       <h2>Still stuck?</h2>
-      <p style="text-align:center">Email <a href="mailto:hello.slateandledger@gmail.com">hello.slateandledger@gmail.com</a>
+      <p style="text-align:center">Email <a href="mailto:hello@slateandledger.net">hello@slateandledger.net</a>
       with which tool, what you were trying to do, and what happened instead &mdash; a real person reads every
       message.</p>
 
@@ -745,7 +745,7 @@ faq_html = f"""<!DOCTYPE html>
       <h2>Festival partners</h2>
       <p><strong>Are you affiliated with any festivals?</strong> We're building relationships with a small
       number of festivals to offer their filmmakers a discount on the suite. If your festival is interested in
-      partnering, email <a href="mailto:hello.slateandledger@gmail.com">hello.slateandledger@gmail.com</a>.</p>
+      partnering, email <a href="mailto:hello@slateandledger.net">hello@slateandledger.net</a>.</p>
 
       <h2>Micro-Budget Film Budget Builder</h2>
       <p><strong>Do I still need Movie Magic Budgeting?</strong> No &mdash; built to replace it at this budget
@@ -775,7 +775,7 @@ faq_html = f"""<!DOCTYPE html>
 
       <p style="text-align:center; margin-top:34px">Question not answered here? Check the
       <a href="help.html">Help</a> page, or email
-      <a href="mailto:hello.slateandledger@gmail.com">hello.slateandledger@gmail.com</a>.</p>
+      <a href="mailto:hello@slateandledger.net">hello@slateandledger.net</a>.</p>
 
       {footer()}
     </div>
@@ -854,7 +854,7 @@ terms_html = f"""<!DOCTYPE html>
       principles.</p>
 
       <h2>11. Contact</h2>
-      <p>Questions about these terms, licensing, or a refund: <a href="mailto:hello.slateandledger@gmail.com">hello.slateandledger@gmail.com</a>.</p>
+      <p>Questions about these terms, licensing, or a refund: <a href="mailto:hello@slateandledger.net">hello@slateandledger.net</a>.</p>
 
       <div class="callout">This page is a first draft, not a substitute for review by a qualified attorney
       before relying on it for real commercial sales at volume.</div>
@@ -879,7 +879,7 @@ contact_html = f"""<!DOCTYPE html>
 
     <div class="fade-3">
       <div class="contact-block">
-        <a class="email" href="mailto:hello.slateandledger@gmail.com">hello.slateandledger@gmail.com</a>
+        <a class="email" href="mailto:hello@slateandledger.net">hello@slateandledger.net</a>
       </div>
       <div class="prose">
         <p style="text-align:center">Questions about a product, a licensing question, a refund, or which
