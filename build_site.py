@@ -321,6 +321,17 @@ CSS = """
   .price-line{ text-align:center; margin:40px 0 18px; }
   .price-line .amt{ font-family:var(--f-head); letter-spacing:.02em; font-size:48px; color:var(--gold); }
   .price-line .note{ display:block; font-family:var(--f-util); font-size:13px; color:var(--text-faint); margin-top:4px; }
+  /* ---- "For actors" block: links to Thoughtline, which has its own look on its own pages ---- */
+  .actors{ display:flex; align-items:center; gap:18px; margin:26px 0 8px; padding:18px 20px; border:1px solid var(--line);
+    border-radius:10px; background:var(--surface); color:var(--text); text-decoration:none; text-transform:none; letter-spacing:0; }
+  .actors:hover{ border-color:var(--gold-dim); text-decoration:none; }
+  .actors img{ width:64px; height:64px; border-radius:14px; flex:none; }
+  .actors-text{ display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; }
+  .actors-kicker{ font-family:var(--f-util); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
+  .actors-name{ font-family:var(--f-head); font-size:26px; letter-spacing:.04em; text-transform:uppercase; }
+  .actors-line{ font-family:var(--f-util); font-weight:500; font-size:15px; line-height:1.5; color:var(--text-dim); -webkit-text-stroke:0; }
+  .actors-go{ font-family:var(--f-head); font-size:14px; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); white-space:nowrap; }
+  @media (max-width:640px){ .actors{ flex-wrap:wrap; } .actors-go{ width:100%; } }
   .cta-row{ text-align:center; margin:22px 0 8px; }
   .btn{ display:inline-block; font-family:var(--f-head); font-size:16px; letter-spacing:.06em;
     text-transform:uppercase; padding:14px 28px; border-radius:5px; border:1px solid var(--slate-line); }
@@ -372,6 +383,7 @@ def brandline(depth="", current=""):
         link("FAQ", f"{depth}faq.html", "faq"),
         link("Terms", f"{depth}terms.html", "terms"),
         link("Contact", f"{depth}contact.html", "contact"),
+        link("For actors: Thoughtline", f"{depth}thoughtline/index.html", "thoughtline"),
     ]
     return f"""<header class="marquee">
     <div class="sprockets"></div>
@@ -391,7 +403,8 @@ def footer(depth=""):
     <a href="{depth}help.html">Help</a> &middot;
     <a href="{depth}faq.html">FAQ</a> &middot;
     <a href="{depth}terms.html">Terms of Sale</a> &middot;
-    <a href="{depth}contact.html">Contact</a></span>
+    <a href="{depth}contact.html">Contact</a> &middot;
+    <a href="{depth}thoughtline/index.html">For actors: Thoughtline</a></span>
   </footer>"""
 
 # ------------------------------------------------------------------
@@ -456,6 +469,19 @@ index_html = f"""<!DOCTYPE html>
         <span class="amt">{SUITE_PRICE}</span>
         <span class="note">the full suite, once &mdash; buy two tools and the other three are basically free</span>
       </div>
+
+      <hr class="rule">
+
+      <a class="actors" href="thoughtline/index.html">
+        <img src="thoughtline/img/icon.png" alt="" width="64" height="64">
+        <span class="actors-text">
+          <span class="actors-kicker">For actors</span>
+          <span class="actors-name">Thoughtline</span>
+          <span class="actors-line">An iPhone app for learning lines through the inner life: do your prep on the script page,
+            then learn, run and self-tape from it. Free beta now; $19.99 once at launch.</span>
+        </span>
+        <span class="actors-go">See Thoughtline &rarr;</span>
+      </a>
 
       {footer()}
     </div>
